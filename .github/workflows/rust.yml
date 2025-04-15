@@ -23,7 +23,7 @@ jobs:
         run: |
           rustup update
           sudo apt-get update
-          sudo apt-get install -y build-essential
+          sudo apt-get install -y libgtk-4-dev build-essential
 
       - name: Build
         run: cargo build --release
