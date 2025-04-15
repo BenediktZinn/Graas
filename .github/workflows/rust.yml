@@ -1,21 +1,32 @@
-name: Rust
+name: Rust Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
-
-env:
-  CARGO_TERM_COLOR: always
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: sudo apt install libgtk-4-dev build-essential\
-           cargo build --verbose
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install dependencies
+        run: |
+          rustup update
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Test
+        run: cargo test
