@@ -1,6 +1,7 @@
-use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, glib};
-use ui::graphic::canvas::Canvas;
+use gtk::{Application, ApplicationWindow, Orientation, glib};
+use gtk::{Paned, prelude::*};
+use ui::graphic::block_canvas::BlockCanvas;
+use ui::text::text_canvas::TextCanvas;
 
 pub mod ui;
 
@@ -20,7 +21,14 @@ fn build_ui(app: &Application) {
         .default_width(800)
         .default_height(600)
         .build();
-    let _canvas = Canvas::new(&window);
+    let block_canvas = BlockCanvas::new();
+    let text_canvas = TextCanvas::new();
 
+    let main_pane = Paned::new(Orientation::Horizontal);
+    main_pane.set_start_child(Some(&text_canvas.source_view));
+    main_pane.set_end_child(Some(&block_canvas.drawing_area));
+
+    main_pane.set_position(400);
+    window.set_child(Some(&main_pane));
     window.present();
 }

@@ -1,25 +1,21 @@
 use crate::ui::graphic::blocks::Block;
 use cairo::Context;
-use gtk::ApplicationWindow;
 use gtk::DrawingArea;
 use gtk::prelude::*;
 
-pub struct Canvas {
-    _drawing_area: DrawingArea,
+pub struct BlockCanvas {
+    pub drawing_area: DrawingArea,
 }
 
-impl Canvas {
-    pub fn new(window: &ApplicationWindow) -> Self {
+impl BlockCanvas {
+    pub fn new() -> Self {
         let drawing_area = DrawingArea::new();
 
         drawing_area.set_draw_func(|_, ctx, width, height| {
             draw_func(ctx, width.try_into().unwrap(), height.try_into().unwrap());
         });
 
-        window.set_child(Some(&drawing_area));
-        Self {
-            _drawing_area: drawing_area,
-        }
+        Self { drawing_area }
     }
 }
 

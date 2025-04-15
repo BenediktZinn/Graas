@@ -1,2 +1,2 @@
+pub mod block_canvas;
 pub mod blocks;
-pub mod canvas;
