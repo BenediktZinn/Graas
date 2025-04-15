@@ -1,4 +1,4 @@
-use crate::rast::blocks::Block;
+use crate::ui::graphic::blocks::Block;
 use cairo::Context;
 use gtk::ApplicationWindow;
 use gtk::DrawingArea;
@@ -25,7 +25,7 @@ impl Canvas {
 
 fn draw_func(ctx: &Context, _: u32, _: u32) {
     // Implement drawing logic here
-    let block = Block::new(
+    let mut block = Block::new(
         50.0,
         50.0,
         "this is a very long test\n with multiple lines\n and more".to_string(),

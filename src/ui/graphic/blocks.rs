@@ -3,15 +3,23 @@ use cairo::Context;
 pub struct Block {
     x: f64,
     y: f64,
+    width: f64,
+    height: f64,
     label: String,
 }
 
 impl Block {
     pub fn new(x: f64, y: f64, label: String) -> Self {
-        Block { x, y, label }
+        Block {
+            x,
+            y,
+            width: 10.0,
+            height: 10.0,
+            label,
+        }
     }
 
-    pub fn draw(&self, cr: &Context) -> Result<(), cairo::Error> {
+    pub fn draw(&mut self, cr: &Context) -> Result<(), cairo::Error> {
         let padding_x = 20.0;
         let padding_y = 20.0;
         let font_size = 18.0;
@@ -22,13 +30,11 @@ impl Block {
         let text_width = extents.width();
         let text_height = extents.height();
 
-        // Total block dimensions with padding
-        let block_width = text_width + padding_x * 2.0;
-        let block_height = text_height + padding_y * 2.0;
+        self.width = text_width + padding_x * 2.0;
+        self.height = text_height + padding_y * 2.0;
 
-        // Draw block background
         cr.set_source_rgb(0.2, 0.6, 0.8);
-        cr.rectangle(self.x, self.y, block_width, block_height);
+        cr.rectangle(self.x, self.y, self.width, self.height);
         cr.fill_preserve()?;
         cr.set_source_rgb(0.0, 0.0, 0.0);
         cr.set_line_width(2.0);

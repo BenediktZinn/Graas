@@ -1,8 +1,8 @@
 use gtk::prelude::*;
 use gtk::{Application, ApplicationWindow, glib};
-use rast::canvas::Canvas;
+use ui::graphic::canvas::Canvas;
 
-pub mod rast;
+pub mod ui;
 
 const APP_ID: &str = "org.graas.MainUI";
 
