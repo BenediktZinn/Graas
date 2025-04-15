@@ -5,7 +5,7 @@ use gtk::DrawingArea;
 use gtk::prelude::*;
 
 pub struct Canvas {
-    drawing_area: DrawingArea,
+    _drawing_area: DrawingArea,
 }
 
 impl Canvas {
@@ -17,7 +17,9 @@ impl Canvas {
         });
 
         window.set_child(Some(&drawing_area));
-        Self { drawing_area }
+        Self {
+            _drawing_area: drawing_area,
+        }
     }
 }
 
